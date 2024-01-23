@@ -1,13 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { TaskResponse } from "../types";
-import axios from 'axios';
+import { getTasks } from '../api/taskapi';
 
 function TaskList() {
-    const getTasks = async (): Promise<TaskResponse[]> => {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/tasks`);
-        console.log(response);
-        return response.data as TaskResponse[];
-    }
 
     const { data, error, isSuccess } = useQuery({
         queryKey: ["tasks"],
