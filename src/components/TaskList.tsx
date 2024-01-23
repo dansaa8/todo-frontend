@@ -1,8 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { TaskResponse } from "../types";
 import { getTasks } from '../api/taskapi';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 function TaskList() {
+
+    const columns: GridColDef[] = [
+        { field: 'name', headerName: 'Name',width: 200 },
+        { field: 'deadline', headerName: 'Deadline',width: 200 },
+    ]
 
     const { data, error, isSuccess } = useQuery({
         queryKey: ["tasks"],
@@ -17,16 +23,12 @@ function TaskList() {
     }
     else {
         return (
-            <table>
-                <tbody>
-                    {
-                        data.map((task: TaskResponse) => 
-                        <tr key={task.id}>
-                            <td>{task.name}</td>
-                        </tr>)
-                    }
-                </tbody>
-            </table>
+            <DataGrid          
+            rows={data}
+            columns={columns}
+            getRowId={row => row.id}>
+       
+            </DataGrid>
             );
     }
 }
