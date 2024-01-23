@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function TaskList() {
     const getTasks = async (): Promise<TaskResponse[]> => {
-        const response = await axios.get("http://localhost:8080/api/tasks");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/tasks`);
         console.log(response);
         return response.data as TaskResponse[];
     }
