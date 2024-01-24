@@ -6,6 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Task } from "../types";
 import TaskDialogContent from "./TaskDialogContent";
+import Button from "@mui/material/Button";
 
 function AddTask() {
   const queryClient = useQueryClient();
@@ -51,13 +52,22 @@ function AddTask() {
   };
   return (
     <>
-      <button onClick={handleClickOpen}>New Task</button>
+      <Button onClick={handleClickOpen}>New Task</Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Task</DialogTitle>
-        <TaskDialogContent task={task} handleChange={handleChange} handleDateChange={handleDateChange}></TaskDialogContent>
+        <TaskDialogContent
+          task={task}
+          handleChange={handleChange}
+          handleDateChange={handleDateChange}
+        ></TaskDialogContent>
         <DialogActions>
-          <button onClick={handleClose}>Cancel</button>
-          <button onClick={handleSave} disabled={task.deadline === null || task.name.trim() === ""}>Save</button>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button
+            onClick={handleSave}
+            disabled={task.deadline === null || task.name.trim() === ""}
+          >
+            Save
+          </Button>
         </DialogActions>
       </Dialog>
     </>
