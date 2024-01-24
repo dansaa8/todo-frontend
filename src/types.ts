@@ -3,6 +3,11 @@
    deadline: Date | null;
  }
 
+ export type TaskEntry = {
+  task: Task,
+  id: number
+ }
+
  export type TaskResponse = {
     name: string;
     id: number;

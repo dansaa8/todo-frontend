@@ -2,6 +2,8 @@ import { Task } from '../types';
 import DialogContent from "@mui/material/DialogContent";
 import { DesktopDateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import 'dayjs/locale/de';
+
 
 
 type DialogFormProps = {
@@ -22,7 +24,7 @@ function TaskDialogContent({ task, handleChange, handleDateChange }: DialogFormP
           />
         </DialogContent>
         <DialogContent>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
             <DesktopDateTimePicker
               label="Deadline"
               value={task.deadline}

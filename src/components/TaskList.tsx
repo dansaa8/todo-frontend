@@ -4,6 +4,7 @@ import { getTasks, deleteTask } from '../api/taskapi';
 import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid';
 import Snackbar from '@mui/material/Snackbar';
 import AddTask from './AddTask';
+import EditTask from './EditTask';
 
 function TaskList() {
     const [open, setOpen] = useState(false);
@@ -21,6 +22,16 @@ function TaskList() {
     const columns: GridColDef[] = [
         { field: 'name', headerName: 'Name',width: 200 },
         { field: 'deadline', headerName: 'Deadline',width: 200 },
+        { 
+            field: 'edit', 
+        headerName: 'Edit', width: 90,
+        sortable: false,
+        filterable: false,
+        disableColumnMenu: true,
+        renderCell: (params: GridCellParams) => 
+        <EditTask taskdata={params.row}/>
+    }
+        ,
         {
             field: 'delete',
             headerName: '',
@@ -32,7 +43,7 @@ function TaskList() {
                 <button 
                 onClick={() => {
                     if (window.confirm(`Are you sure you want to delete ${params.row.name}?`)) { 
-                    mutate(`${import.meta.env.VITE_API_URL}/api/tasks/${params.row.id}`)}
+                    mutate(params.row.id)}
                 }}>
                     Delete
                 </button>
