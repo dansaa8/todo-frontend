@@ -3,11 +3,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addTask } from "../api/taskapi";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Task } from "../types";
-import { DesktopDateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import TaskDialogContent from "./TaskDialogContent";
 
 function AddTask() {
   const queryClient = useQueryClient();
@@ -56,23 +54,7 @@ function AddTask() {
       <button onClick={handleClickOpen}>New Task</button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Task</DialogTitle>
-        <DialogContent>
-          <input
-            placeholder="Name"
-            name="name"
-            value={task.name}
-            onChange={handleChange}
-          />
-        </DialogContent>
-        <DialogContent>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DesktopDateTimePicker
-              label="Deadline"
-              value={task.deadline}
-              onChange={handleDateChange}
-            />
-          </LocalizationProvider>
-        </DialogContent>
+        <TaskDialogContent task={task} handleChange={handleChange} handleDateChange={handleDateChange}></TaskDialogContent>
         <DialogActions>
           <button onClick={handleClose}>Cancel</button>
           <button onClick={handleSave} disabled={task.deadline === null || task.name.trim() === ""}>Save</button>
