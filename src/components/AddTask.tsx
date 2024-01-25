@@ -9,6 +9,12 @@ import TaskDialogContent from "./TaskDialogContent";
 import Button from "@mui/material/Button";
 
 function AddTask() {
+  const [open, setOpen] = useState(false);
+  const [task, setTask] = useState<Task>({
+    name: "",
+    deadline: null,
+  });
+
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation(addTask, {
@@ -20,11 +26,14 @@ function AddTask() {
     },
   });
 
-  const [open, setOpen] = useState(false);
-  const [task, setTask] = useState<Task>({
-    name: "",
-    deadline: null,
-  });
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
   const handleSave = () => {
     mutate(task);
@@ -43,13 +52,6 @@ function AddTask() {
     });
   };
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   return (
     <>
       <Button onClick={handleClickOpen}>New Task</Button>
