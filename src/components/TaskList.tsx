@@ -7,8 +7,14 @@ import AddTask from "./AddTask";
 import EditTask from "./EditTask";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
-function TaskList() {
+type TaskListProps = {
+  logOut?: () => void;
+}
+
+function TaskList({ logOut }: TaskListProps) {
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
   const { mutate } = useMutation(deleteTask, {
@@ -73,7 +79,11 @@ function TaskList() {
   } else {
     return (
       <>
+      <Stack direction="row" alignItems="center"
+      justifyContent="space-between">
         <AddTask />
+        <Button onClick={logOut}>Log out</Button>
+      </Stack>
         <DataGrid
           rows={data}
           columns={columns}

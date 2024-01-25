@@ -5,6 +5,7 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import TaskList from "./components/TaskList";
+import Login from './components/Login';
 
 // Används för att hantera konfiguration och state av ens queries i sin applikation.
 // QueryClient instancen är en central hub för att hantera data fetching och caching i sin applikation.
@@ -15,14 +16,14 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <Container maxWidth="xl">
-      <CssBaseline /> // Fixar ojämnheter mellan olika browsers
+      <CssBaseline />
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6">Todo List</Typography>
         </Toolbar>
       </AppBar>
       <QueryClientProvider client={queryClient}>
-        <TaskList />
+        <Login />
       </QueryClientProvider>
     </Container>
   );
