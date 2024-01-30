@@ -17,6 +17,12 @@ type TaskListProps = {
 function TaskList({ logOut }: TaskListProps) {
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
+
+    const { data, error, isSuccess } = useQuery({
+    queryKey: ["tasks"],
+    queryFn: getTasks,
+  });
+  
   const { mutate } = useMutation(deleteTask, {
     onSuccess: () => {
       setOpen(true);
@@ -66,11 +72,6 @@ function TaskList({ logOut }: TaskListProps) {
       ),
     },
   ];
-
-  const { data, error, isSuccess } = useQuery({
-    queryKey: ["tasks"],
-    queryFn: getTasks,
-  });
 
   if (!isSuccess) {
     return <span>Loading...</span>;
